@@ -15,11 +15,12 @@ struct coordinates {
   int size;
 };
 
-int is_point_in_radius(struct coordinate center, struct coordinate point,
-                       int radius) {
-  return ((point.x >= (center.x - radius)) &&
-          (point.x <= (center.x + radius)) &&
-          (point.y <= (center.y + radius)) && (point.y >= (center.y - radius)))
+int is_target_in_radius(struct coordinate center, struct coordinate target,
+                        int radius) {
+  return ((target.x >= (center.x - radius)) &&
+          (target.x <= (center.x + radius)) &&
+          (target.y <= (center.y + radius)) &&
+          (target.y >= (center.y - radius)))
              ? 1
              : 0;
 }
@@ -28,7 +29,7 @@ int targets_in_radius(struct coordinate center, struct coordinates *coords,
                       int radius) {
   int i, targets = 0;
   for (i = 0; i < coords->size; i += 1)
-    if (is_point_in_radius(center, coords->cds[i], radius))
+    if (is_target_in_radius(center, coords->cds[i], radius))
       targets += 1;
   return targets;
 }
